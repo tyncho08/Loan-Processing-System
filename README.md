@@ -49,15 +49,15 @@ A modern loan processing system built with **Angular** frontend and **.NET Core 
 
    The script will automatically:
    - Install Angular dependencies
-   - Start the .NET Core Web API on port 44365
-   - Start the Angular frontend on port 3000
+   - Start the .NET Core Web API on port 5275
+   - Start the Angular frontend on port 4200
    - Create and seed the SQLite database
 
 ## 🌐 Access URLs
 
-- **Frontend**: http://localhost:3000
-- **Backend API**: http://localhost:44365
-- **API Documentation**: http://localhost:44365/swagger
+- **Frontend**: http://localhost:4200
+- **Backend API**: http://localhost:5275
+- **API Documentation**: http://localhost:5275/swagger
 
 ## 📁 Project Structure
 
@@ -125,9 +125,10 @@ npm start
 
 ### Common Issues
 
-1. **Port conflicts**: The script automatically kills processes on ports 3000 and 44365
+1. **Port conflicts**: The script automatically kills processes on ports 4200 and 5275
 2. **Node.js compatibility**: Uses `--openssl-legacy-provider` flag for older Angular versions
 3. **SSL certificates**: Configured to use HTTP for development to avoid certificate issues
+4. **Connection refused**: Make sure both backend and frontend are running before accessing the app
 
 ### Node.js Version Issues
 If you encounter SSL/OpenSSL errors:

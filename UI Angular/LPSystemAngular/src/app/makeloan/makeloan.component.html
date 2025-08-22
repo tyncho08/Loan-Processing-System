@@ -88,8 +88,8 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="usermob">Mobile Number</label>
-                            <input class="form-control" type="number" id="usermob" name="usermob"
-                                formControlName="usermob" placeholder="Enter user mobile number">
+                            <input class="form-control" type="text" id="usermob" name="usermob"
+                                formControlName="usermob" placeholder="Enter user mobile number" maxlength="10">
                             <span style="color: red;"
                                 *ngIf="loanApp.get('usermob') && (loanApp.get('usermob').touched||loanApp.get('usermob').dirty) && loanApp.get('usermob').invalid">
                                 <span *ngIf="loanApp.get('usermob').errors.required">
@@ -104,8 +104,8 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="useradhaar">Adhaar No</label>
-                            <input class="form-control" type="number" id="useradhaar" name="useradhaar"
-                                formControlName="useradhaar" placeholder="Enter user adhaar number">
+                            <input class="form-control" type="text" id="useradhaar" name="useradhaar"
+                                formControlName="useradhaar" placeholder="Enter user adhaar number" maxlength="12">
                             <span style="color: red;"
                                 *ngIf="loanApp.get('useradhaar') && (loanApp.get('useradhaar').touched||loanApp.get('useradhaar').dirty) && loanApp.get('useradhaar').invalid">
                                 <span *ngIf="loanApp.get('useradhaar').errors.required">
@@ -125,8 +125,8 @@
                             <select class="form-control" id="loantype" name="loantype" formControlName="loantype"
                                 (change)="takeAmount($event.target.value)">
                                 <option selected value="" disabled>Choose...</option>
-                                <option *ngFor='let loan of listOfLoans' [value]="loan.LoanId">
-                                    {{loan.LoanId}} - {{loan.LoanType}}
+                                <option *ngFor='let loan of listOfLoans' [value]="loan.loanId">
+                                    {{loan.loanId}} - {{loan.loanType}}
                                 </option>
                             </select>
 
@@ -141,7 +141,7 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="loanamt">Loan Amount</label>
-                            <input [(ngModel)]='loanAmount' class="form-control" type="number" id="loanamt"
+                            <input class="form-control" type="number" id="loanamt"
                                 name="loanamt" formControlName="loanamt" placeholder="Choose the loan type first">
                             <span style="color: red;"
                                 *ngIf="loanApp.get('loanamt') && (loanApp.get('loanamt').touched||loanApp.get('loanamt').dirty) && loanApp.get('loanamt').invalid">
@@ -157,14 +157,14 @@
                                 </span>
                             </span>
                             <span style="color: red;"
-                                *ngIf="loanAmount<loanValid && (loanApp.get('loanamt').touched||loanApp.get('loanamt').dirty)">
-                                *invalid amount, for this perticular loan type minimum loan amount should be
+                                *ngIf="loanApp.get('loanamt').value && loanApp.get('loanamt').value < loanValid && (loanApp.get('loanamt').touched||loanApp.get('loanamt').dirty)">
+                                *invalid amount, for this particular loan type minimum loan amount should be
                                 {{loanValid}}
                             </span>
                         </div>
                     </div>
                 </div>
-                <button [disabled]='loanApp.invalid || loanAmount<loanValid ' type="submit"
+                <button [disabled]='loanApp.invalid || (loanApp.get("loanamt").value && loanApp.get("loanamt").value < loanValid)' type="submit"
                     class="btn btn-primary">Apply</button>
             </form>
         </div>

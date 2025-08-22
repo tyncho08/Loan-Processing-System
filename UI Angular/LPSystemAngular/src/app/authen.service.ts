@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenService {
 
-  private tokenApi = "http://localhost:44365/token";
+  private tokenApi = `${environment.apiUrl.replace('/api', '')}/token`;
 
   constructor(private http: HttpClient) { }
 

@@ -20,16 +20,15 @@ export class MakeloanComponent implements OnInit {
 
   loanApp;
   listOfLoans;
-  loanAmount;
   loanValid;
 
   ngOnInit() {
     //reactive form validation
     this.loanApp = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(3), Validators.pattern("^[A-Z][a-z]+([\ A-Za-z]+)*")]],
-      usermob: ['', [Validators.required, Validators.pattern("^([\+0]91)?\-?[7-9]{1}[0-9]{9}$")]],
+      usermob: ['', [Validators.required, Validators.pattern("^[0-9]{10}$")]],
       useremail: ['', [Validators.required, Validators.email]],
-      useradhaar: ['', [Validators.required, Validators.pattern("^[2-9]{1}[0-9]{3}[0-9]{4}[0-9]{4}$")]],
+      useradhaar: ['', [Validators.required, Validators.pattern("^[0-9]{12}$")]],
       userpass: ['', [Validators.required, Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$'), Validators.minLength(8)]],
       usergender: ['', [Validators.required,]],
       loantype: ['', [Validators.required,]],
@@ -38,10 +37,14 @@ export class MakeloanComponent implements OnInit {
     //retrieves list of all loan application
     this.loanService.getAllLoans().subscribe(data => {
       this.listOfLoans = data;
-      // console.log(this.listOfLoans);
+      // console.log('Loan data received:', this.listOfLoans);
     }, err => {
       console.log(err);
-      alert('Http Error: ' + err.message);
+      if (err.status === 0) {
+        alert('Cannot connect to server. Please make sure the backend is running on port 5275.');
+      } else {
+        alert('Http Error: ' + err.message);
+      }
     }, () => {
 
     })
@@ -96,14 +99,12 @@ export class MakeloanComponent implements OnInit {
   // method of retreiving loan amount based on loan id
   takeAmount(value: Number) {
     this.listOfLoans.forEach(element => {
-      if (element.LoanId == value) {
-        // console.log(this.loanAmount);
-        localStorage.setItem('amount', element.LoanAmt);
+      if (element.loanId == value) {
+        this.loanValid = element.loanAmt;
+        // Update the form control with the minimum amount
+        this.loanApp.get('loanamt').setValue(element.loanAmt);
+        this.loanApp.get('loanamt').updateValueAndValidity();
       }
     });
-    this.loanAmount = Number(localStorage.getItem('amount'));
-    this.loanValid = Number(localStorage.getItem('amount'));
-    localStorage.removeItem('amount');
-
   }
 }

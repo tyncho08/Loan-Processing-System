@@ -32,10 +32,13 @@ Thumbs.db
 packages/
 */packages/
 
-# Database files
+# Database files (runtime generated)
 *.db
 *.db-shm
 *.db-wal
+
+# But include migration files
+!WebAPICore/Migrations/
 
 # Temporary files
 *.tmp
@@ -61,3 +64,12 @@ Test Cases/
 
 # Compiled output
 /WebAPICore/wwwroot/
+
+# Documentation files (auto-generated during development)
+FIXED_ISSUES.md
+LATEST_FIXES.md
+FINAL_FIX.md
+MOBILE_VALIDATION_FIX.md
+test-backend.sh
+verify-fix.sh
+start-backend.sh

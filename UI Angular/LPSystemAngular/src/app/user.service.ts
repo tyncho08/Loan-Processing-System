@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { RouterModule, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  private urlUser = "http://localhost:44365/api/UserTables"
+  private urlUser = `${environment.apiUrl}/UserTables`
 
   constructor(public http: HttpClient, public router: Router) { }
 
@@ -26,11 +27,11 @@ export class UserService {
   }
   // service of checking a user credentials (admin/clients/customer)
   checkLogin(userData): Observable<any> {
-    return this.http.post("http://localhost:44365/api/LoginAuth", userData);
+    return this.http.post(`${environment.apiUrl}/LoginAuth`, userData);
   }
 
   checkUserExist(userData): Observable<any> {
-    return this.http.post("http://localhost:44365/api/IfUserExist", userData);
+    return this.http.post(`${environment.apiUrl}/IfUserExist`, userData);
   }
 
 
