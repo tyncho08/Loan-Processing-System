@@ -1,0 +1,63 @@
+# Dependencies
+node_modules/
+*/node_modules/
+
+# Build outputs
+dist/
+*/dist/
+build/
+*/build/
+bin/
+*/bin/
+obj/
+*/obj/
+
+# IDE files
+.vscode/
+.vs/
+*.user
+*.suo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Angular specific
+*.js.map
+*.css.map
+
+# .NET specific
+*.log
+*.cache
+packages/
+*/packages/
+
+# Database files
+*.db
+*.db-shm
+*.db-wal
+
+# Temporary files
+*.tmp
+*.temp
+*~
+
+# Environment files
+.env
+.env.local
+.env.production
+
+# NPM logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Test coverage
+coverage/
+
+# Old project files (keeping for reference but not tracking changes)
+WebAPI/LPSystemWebAPI/
+Test Cases/
+
+# Compiled output
+/WebAPICore/wwwroot/
